@@ -8,14 +8,9 @@ output "vnet_name" {
   value = module.vnet.vnet_name
 }
 
-# # Single subnet
-# output "subnet_id" {
-#   value = module.vnet.subnet_id
-# }
-
-# Multiple subnets
+# Single subnet
 output "subnet_id" {
-  value = module.vnet.subnet_ids
+  value = module.vnet.subnet_id
 }
 
 # NSG Id

@@ -5,8 +5,7 @@ resource "azurerm_network_interface" "NIC" {
 
   ip_configuration {
     name                          = "internal"
-    # subnet_id                     = var.Subnet_id # for single subnet
-    subnet_id                     = var.Subnet_ids[0]
+    subnet_id                     = var.Subnet_id # for single subnet
     private_ip_address_allocation = "Dynamic"
   }
 
