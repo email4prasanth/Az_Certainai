@@ -18,11 +18,6 @@ variable "Address_space" {
   type        = list(string)
 }
 
-# # Single Subnet
-# variable "Address_prefixes" {
-#   description = "The address space of the VNet"
-#   type        = list(string)
-# }
 
 # Multiple subnets
 variable "subnets" {
