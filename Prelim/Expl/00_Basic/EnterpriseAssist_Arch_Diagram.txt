@@ -1,0 +1,70 @@
+List of words in Architecuture
+source:https://www.jpgtotext.com/
+
+Internet
+Detailed Architecture
+Azure Cloud
+Resource groups
+Client
+Azure Front Door WAF
+Web Portal
+CDN
+Azure App
+DNS Lookup
+Service
+Security
+Azure B2C
+Azure firewall
+Network security group
+Traffic filtering
+network rules
+Identity Management
+Availability zone 1
+App Subnet
+Elastic Load Balancing
+Auto Scaling Group
+Azure App Service
+Azure blob
+store files
+secure credentials
+Diagnostic Logs and Metrics data
+Subnet
+Auto Scaling Group
+Store User, Access Control and Document Management Data
+M
+RDS DE Master
+Azure Load Balancer
+Azure Key Vault
+API Management
+Availability zone 2
+Azure App Service
+store files 10
+Azure blob
+Extract Text From image of Document
+S
+Cognitive Service
+Store User
+Get Extracted data
+Store Embeddings
+in database
+Response As
+RDS DB Standby Multi-AZ
+Embedded Data
+Send text data
+Specific
+data
+for
+Report
+DNS
+generation
+Subnet
+Azure DNS
+Subnet
+Subnet
+Weaviate
+Open Al(Llama)
+Vector Database
+Synapse Analytics
+Metrics
+Azure Monitor
+Log Analytics
