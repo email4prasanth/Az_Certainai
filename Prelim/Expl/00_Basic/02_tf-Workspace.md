@@ -34,5 +34,34 @@ az provider show --namespace Microsoft.Management --query "registrationState"
 If they return "Registered", retry 
 ```
 terraform plan -var-file="tut-ws.tfvars"
-terraform apply -var-file="tut-ws.tfvars --apply-autoapprove
+terraform apply -var-file="tut-ws.tfvars" --auto-approve
+```
+
+- General instruction
+```
+terraform init
+terraform workspace list
+terraform workspace select tut-ws
+terraform workspace show
+terraform plan -var-file="tut-ws.tfvars"
+terraform apply -var-file="tut-ws.tfvars" --auto-approve
+terraform state list
+terraform output
+terraform destroy -var-file="tut-ws.tfvars" --auto-approve
+```
+- Imports existing infrastructure into your Terraform state
+```
+terraform import aws_instance.my_instance i-1234567890abcdef0
+```
+-  Terraform State Commands
+```
+terraform state show aws_instance.my_instance
+terraform state mv aws_instance.my_instance aws_instance.new_instance
+terraform state rm aws_instance.my_instance
+```
+- Taint (Marks a resource for recreation), provider, graph
+```
+terraform taint aws_instance.my_instance
+terraform untaint aws_instance.my_instance
+terraform graph | dot -Tpng > graph.png
 ```

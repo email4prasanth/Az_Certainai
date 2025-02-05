@@ -1,0 +1,30 @@
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\resource_group\main.tf
+# Create a resource group
+resource "azurerm_resource_group" "RG" {
+  name     = var.RG_name
+  location = var.Loca_name
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\resource_group\outputs.tf
+output "rg_name" {
+  value = azurerm_resource_group.RG.name  # (OR) value = var.RG_name
+}
+
+output "loc_name" {
+  value = var.Loca_name
+}
+
+output "resource_group_id" {
+  value = azurerm_resource_group.RG.id
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\resource_group\variables.tf
+variable "RG_name" {
+  description = "The name of the resource group"
+  type        = string
+}
+
+variable "Loca_name" {
+  description = "The Azure region to create the resource group"
+  type        = string
+}
