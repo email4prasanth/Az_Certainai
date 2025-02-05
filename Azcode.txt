@@ -28,3 +28,305 @@ variable "Loca_name" {
   description = "The Azure region to create the resource group"
   type        = string
 }
+
+----------------------VNET----------------
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\vnet\main.tf
+resource "azurerm_virtual_network" "VNet" {
+  name                = var.Vnet_name
+  location            = var.Loca_name
+  resource_group_name = var.RG_name  # (OR) resource_group_name = module.resource_group.rg_name
+  address_space       = var.Address_space
+  tags = var.Tags
+}
+
+# Create a subnet within the resource group
+resource "azurerm_subnet" "subnet1" {
+  name                 = "dkutti_subnet1"
+  resource_group_name  = var.RG_name
+  virtual_network_name = azurerm_virtual_network.VNet.name
+  address_prefixes     = var.Address_prefixes # ["10.0.2.0/24"]
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\vnet\outputs.tf
+output "vnet_id" {
+  value = azurerm_virtual_network.VNet.id
+}
+
+output "vnet_name" {
+  value = azurerm_virtual_network.VNet.name
+}
+
+output "subnet_id" {
+  value = azurerm_subnet.subnet1.id
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\vnet\variables.tf
+variable "Vnet_name" {
+  description = "The name of the virtual network"
+  type        = string
+}
+
+variable "RG_name" {
+  description = "The name of the resource group to associate with the VNet"
+  type        = string
+}
+
+variable "Loca_name" {
+  description = "The Azure region to create the VNet"
+  type        = string
+}
+
+variable "Address_space" {
+  description = "The address space of the VNet"
+  type        = list(string)
+}
+
+variable "Address_prefixes" {
+  description = "The address space of the VNet"
+  type        = list(string)
+}
+
+variable "Tags" {
+  description = "A mapping of tags to assign to the resource"
+  type        = map(string)
+  default     = {}
+}
+----------------NetworkInterface----------------
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_interface\main.tf
+resource "azurerm_network_interface" "NIC" {
+  name                = var.NIC_name
+  location            = var.Loca_name
+  resource_group_name = var.RG_name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = var.Subnet_id
+    private_ip_address_allocation = "Dynamic"
+  }
+
+  tags = var.Tags
+}
+
+resource "azurerm_network_interface_security_group_association" "nic_nsg" {
+  network_interface_id      = azurerm_network_interface.NIC.id
+  network_security_group_id = var.Nsg_id
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_interface\variables.tf
+variable "NIC_name" {
+  description = "The name of the Network Interface"
+  type        = string
+}
+
+variable "RG_name" {
+  description = "The name of the resource group"
+  type        = string
+}
+
+variable "Loca_name" {
+  description = "The Azure location/region"
+  type        = string
+}
+
+variable "Subnet_id" {
+  description = "The ID of the subnet"
+  type        = string
+}
+
+variable "Nsg_id" {
+  description = "The ID of the Network Security Group"
+  type        = string
+}
+
+variable "Tags" {
+  description = "Tags for NIC"
+  type        = map(string)
+  default     = {}
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_interface\outputs.tf
+output "nic_id" {
+  value = azurerm_network_interface.NIC.id
+}
+----------------network_security_group-----------
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_security_group\main.tf
+resource "azurerm_network_security_group" "NSG" {
+  name                = var.NSG_name
+  location            = var.Loca_name
+  resource_group_name = var.RG_name
+
+# Allow all
+  security_rule {
+    name                       = "Allow-All-Trafic"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+#   security_rule {
+#     name                       = "Allow-SSH"
+#     priority                   = 100
+#     direction                  = "Inbound"
+#     access                     = "Allow"
+#     protocol                   = "Tcp"
+#     source_port_range          = "*"
+#     destination_port_range     = "22"
+#     source_address_prefix      = "*"
+#     destination_address_prefix = "*"
+#   }
+
+#   security_rule {
+#     name                       = "Allow-HTTP"
+#     priority                   = 110
+#     direction                  = "Inbound"
+#     access                     = "Allow"
+#     protocol                   = "Tcp"
+#     source_port_range          = "*"
+#     destination_port_range     = "80"
+#     source_address_prefix      = "*"
+#     destination_address_prefix = "*"
+#   }
+
+#   security_rule {
+#     name                       = "Allow-RDP"
+#     priority                   = 120
+#     direction                  = "Inbound"
+#     access                     = "Allow"
+#     protocol                   = "Tcp"
+#     source_port_range          = "*"
+#     destination_port_range     = "3389"
+#     source_address_prefix      = "*"
+#     destination_address_prefix = "*"
+#   }
+
+  tags = var.Tags
+}
+
+
+# NSG to Subnet (Optional)
+# resource "azurerm_subnet_network_security_group_association" "example" {
+#   subnet_id                 = module.vnet.subnet_id
+#   network_security_group_id = azurerm_network_security_group.NSG.id
+# }
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_security_group\variables.tf
+variable "NSG_name" {
+  description = "The name of the Network Security Group"
+  type        = string
+}
+
+variable "RG_name" {
+  description = "The name of the resource group"
+  type        = string
+}
+
+variable "Loca_name" {
+  description = "The location/region"
+  type        = string
+}
+
+variable "Tags" {
+  description = "Tags for NSG"
+  type        = map(string)
+  default     = {}
+}
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\modules\network_security_group\outputs.tf
+output "nsg_id" {
+  value = azurerm_network_security_group.NSG.id
+}
+
+
+----------------Root Module---------------------
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\main.tf
+provider "azurerm" {
+  features {}
+
+  subscription_id = var.subscription_id
+  tenant_id       = var.tenant_id
+}
+
+# Resource Group Creation
+module "rgroup" {
+  source    = "./modules/resource_group"
+  RG_name   = "Test-RG"
+  Loca_name = "East US"
+}
+
+# Virtual Network Creation
+module "vnet" {
+  source           = "./modules/virtual_network"
+  Vnet_name        = "Test-VNet"
+  RG_name          = module.rgroup.rg_name
+  Loca_name        = module.rgroup.loc_name
+  Address_space    = ["10.0.0.0/16"]
+  Address_prefixes = ["10.0.2.0/24"]
+  Tags             = { "environment" = "uat" }
+}
+
+
+# Network Security Group and rules
+module "nsg" {
+  source    = "./modules/network_security_group"
+  NSG_name  = "Test-NSG"
+  RG_name   = module.rgroup.rg_name
+  Loca_name = module.rgroup.loc_name
+  Tags      = { "environment" = "uat" }
+}
+
+# Network Interface
+module "nic" {
+  source    = "./modules/network_interface"
+  NIC_name  = "Test-NIC"
+  RG_name   = module.rgroup.rg_name
+  Loca_name = module.rgroup.loc_name
+  Subnet_id = module.vnet.subnet_id
+  Nsg_id    = module.nsg.nsg_id
+  Tags      = { "environment" = "uat" }
+}
+
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\outputs.tf
+# Reource Group outputs
+output "resource_group_name" {
+  value = module.rgroup.rg_name
+}
+
+# VNET Outputs
+output "vnet_name" {
+  value = module.vnet.vnet_name
+}
+
+output "subnet_id" {
+  value = module.vnet.subnet_id
+}
+
+# NSG Id
+output "nsg_id" {
+  value = module.nsg.nsg_id
+}
+
+# NIC Id
+output "nic_id" {
+  value = module.nic.nic_id
+}
+
+
+D:\Professional_hubino\Az_Certainai\Prelim\Expl\03_AzCode\01-az-app-svc\variables.tf
+variable "subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+  default     = ""
+}
+
+variable "tenant_id" {
+  description = "Azure Tenant ID"
+  type        = string
+  default     = ""
+}
+-------------------------

@@ -13,12 +13,27 @@ variable "Loca_name" {
   type        = string
 }
 
-variable "address_space" {
+variable "Address_space" {
   description = "The address space of the VNet"
   type        = list(string)
 }
 
-variable "tags" {
+# # Single Subnet
+# variable "Address_prefixes" {
+#   description = "The address space of the VNet"
+#   type        = list(string)
+# }
+
+# Multiple subnets
+variable "subnets" {
+  description = "List of subnet configurations"
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+}
+
+variable "Tags" {
   description = "A mapping of tags to assign to the resource"
   type        = map(string)
   default     = {}
