@@ -1,1 +1,0 @@
-- Network Interface Card (NIC) with a Network Security Group (NSG) is essential for controlling inbound and outbound traffic
