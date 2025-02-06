@@ -4,7 +4,7 @@ module "nic" {
   NIC_name  = "Test-NIC"
   RG_name   = module.rgroup.rg_name
   Loca_name = module.rgroup.loc_name
-  Subnet_ids = module.vnet.subnet_ids
+  Subnet_id = module.vnet.subnet_id # For single subnet
   Nsg_id    = module.nsg.nsg_id
   Tags      = { "environment" = "uat" }
 }
