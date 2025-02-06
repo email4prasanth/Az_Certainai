@@ -19,4 +19,4 @@ If you're using **Windows Terminal**, follow these steps:
 5. Click Save.
 - Default env path `%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe`
 
-- Remove folders in git ` Remove-Item -Recurse -Force "Folder1", "Folder2"`
+- Remove folders in git `Remove-Item -Recurse -Force "Folder1", "Folder2"`
