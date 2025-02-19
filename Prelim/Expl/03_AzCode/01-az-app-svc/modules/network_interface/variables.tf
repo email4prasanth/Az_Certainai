@@ -13,10 +13,10 @@ variable "Loca_name" {
   type        = string
 }
 
-# Single subnet
-variable "Subnet_id" {
+# Multiple subnet
+variable "Subnet_ids" {
   description = "The ID of the subnet"
-  type        = string
+  type        = list(string)  
 }
 
 variable "Nsg_id" {
