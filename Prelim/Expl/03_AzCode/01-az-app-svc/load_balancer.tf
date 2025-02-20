@@ -1,4 +1,3 @@
-
 module "load_balancer" {
   source    = "./modules/load_balancer"
   lb_name   = "Test-LB"

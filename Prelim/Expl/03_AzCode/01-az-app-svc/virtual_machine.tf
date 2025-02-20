@@ -1,7 +1,7 @@
 
 module "virtual_machine" {
   source         = "./modules/virtual_machine"
-  vm_name        = "dev-vm"
+  vm_name        = "testvm"
   RG_name        = module.rgroup.rg_name
   Loca_name      = module.rgroup.loc_name
   nic_id         = module.nic.nic_id # Use existing NIC
