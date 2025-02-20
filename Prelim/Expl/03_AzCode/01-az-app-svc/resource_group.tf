@@ -2,5 +2,5 @@
 module "rgroup" {
   source    = "./modules/resource_group"
   RG_name   = "Test-RG"
-  Loca_name = "East US"
+  Loca_name = "East US 2"
 }
