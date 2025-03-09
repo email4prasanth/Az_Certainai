@@ -1,0 +1,8 @@
+.terraform*
+.terraform/*
+*.tfvars
+00Deploy-data.md
+01Deploy-resource.md
+02Az-interactive login.md
+zzetacombined.tf
+

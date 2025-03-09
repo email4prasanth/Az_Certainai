@@ -1,0 +1,68 @@
+List of words in Architecuture
+source:https://www.jpgtotext.com/
+
+Internet
+Detailed Architecture
+Azure Cloud
+Resource groups
+Client
+↓
+Azure Front Door WAF CDN
+Web Portal
+Azure App
+Service
+DNS Lookup
+DNS
+Azure DNS
+Blob Static Content
+(Security
+Azure B2C
+Azure firewall
+Network security group
+Traffic filtering
+network rules
+Identity Management
+Availability zone 1
+App Subnet
+Elastic Load Balancing
+Auto Scaling Group
+01
+Azure App Service
+Azure blob
+Azure Load Balancer
+API Management
+GraphQL----
+Availability zone 2
+Azure App Service
+-store data-
+(Subnet
+ΑΙ Application
+process data
+store data
+Subnet
+Auto Scaling Group
+CACHE
+M
+ETL Middleware
+RDS CB
+cache data
+Redis
+Mater
+store files process files
+secure credentials
+Azure Key Vault
+store data
+CACHE
+S
+store files
+01
+Azure blob ETL Middleware
+Redis
+cache data
+process files
+Diagnostic Logs &amp; Metric Data
+Metrics
+Azure Monitor
+RDS DB Standby
+Multi-AZ
+Log Analytics

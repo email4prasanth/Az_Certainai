@@ -1,6 +1,5 @@
 - Current Folders and Files are focusing on Azure Cloud for the projects
-    1. Certainai
-    2. Platform
+    1. Platform 2.0
 - I am using Github Repository `email4prasanth` to store the content.
 - I am focusing on exploring 
     - What are the Azure services required?
