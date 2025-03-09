@@ -1,6 +1,7 @@
 ## Resource creation structure in a clear and tidy format
 ### Step 0: Create Access Management & Key Vault
 Action: Create a Access Management & Key Vault using Terraform.
+```sh
 📂 platform20code
 ├── 📂 modules
 │   ├── 📂 ad_groups
@@ -19,9 +20,11 @@ Action: Create a Access Management & Key Vault using Terraform.
 ├── 📝 key_vault.tf             # 🆕 New Key Vault definition
 ├── 📝 provider.tf
 ├── 📝 zetacombine.ps1          
-├── 📝 zetacombined.tf          
+├── 📝 zetacombined.tf  
+```        
 ### Step 1: Create Resource Group
 Action: Create a Resource Group using Terraform.
+```sh
 📂 platform20code
 ├── 📂 modules
 │   ├── 📂 ad_groups
@@ -41,9 +44,11 @@ Action: Create a Resource Group using Terraform.
 ├── 📝 provider.tf
 ├── 📝 resource_group.tf        # 🆕 New Resource Group definition
 ├── 📝 zetacombine.ps1          
-├── 📝 zetacombined.tf          
+├── 📝 zetacombined.tf    
+```      
 ### Step 2: Set Up Networking
 Action: Create Virtual Network (VNet), Subnets, and Network Security Groups (NSGs).
+```sh
 📂 platform20code
 ├── 📂 modules
 │   ├── 📂 ad_groups
@@ -67,9 +72,11 @@ Action: Create Virtual Network (VNet), Subnets, and Network Security Groups (NSG
 ├── 📝 provider.tf
 ├── 📝 resource_group.tf
 ├── 📝 zetacombine.ps1          
-├── 📝 zetacombined.tf 
+├── 📝 zetacombined.tf
+``` 
 ### Step 3: Set Up Virtual Machine
 Action: Create VitualMachine for testing.
+```sh
 📂 platform20code
 ├── 📂 modules
 │   ├── 📂 ad_groups
@@ -98,7 +105,9 @@ Action: Create VitualMachine for testing.
 ├── 📝 provider.tf
 ├── 📝 resource_group.tf
 ├── 📝 zetacombine.ps1          
-├── 📝 zetacombined.tf  
+├── 📝 zetacombined.tf
+```
+- The **terraform state list** exempting key_valut, ad_agroups  
 ```sh        
 azurerm_linux_virtual_machine.vm
 azurerm_network_interface.NIC
